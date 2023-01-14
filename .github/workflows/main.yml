@@ -39,4 +39,6 @@ jobs:
     - name: Run Pylint Checks
       run: |
         poetry run pylint --errors-only ./bot
-        poetyr run flake8 ./bot
+    - name: Run flake8 Checks
+      run: |
+        poetry run flake8 ./bot
