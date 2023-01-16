@@ -34,7 +34,7 @@ jobs:
         #  password: ${{ env.TOKEN }}
       -
         name: Deploying to remote server via SSH
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.7
         with:
             # Connecting to remote server via SSH
             host: ${{ secrets.REMOTE_SERVER }}
