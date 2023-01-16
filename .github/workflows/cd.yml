@@ -37,10 +37,10 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
             # Connecting to remote server via SSH
-            host: ${{ env.REMOTE_SERVER }}
-            username: ${{ env.SERVER_USERNAME }}
-            password: ${{ env.SERVER_PASSWORD }}
-            port: ${{ env.SERVER_PORT }}
+            host: ${{ secrets.REMOTE_SERVER }}
+            username: ${{ secrets.REMOTE_SERVER_USERNAME }}
+            password: ${{ secrets.REMOTE_SERVER_PASSWORD }}
+            port: ${{ secrets.REMOTE_SERVER_PORT }}
             # Includes Building the Docker image and deploying it to the remote server
             script: |
               whoami
