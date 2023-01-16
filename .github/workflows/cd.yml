@@ -40,7 +40,6 @@ jobs:
             host: ${{ secrets.REMOTE_SERVER }}
             username: ${{ secrets.REMOTE_SERVER_USERNAME }}
             key: ${{ secrets.SSH_KEY }}
-            port: ${{ secrets.REMOTE_SERVER_PORT }}
             # Includes Building the Docker image and deploying it to the remote server
             script: |
               whoami
