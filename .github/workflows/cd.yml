@@ -38,10 +38,4 @@ jobs:
             port: ${{ env.SERVER_PORT }}
             # Includes Building the Docker image and deploying it to the remote server
             script: |
-              docker stop progphil-bot
-              docker rm progphil-bot
-              docker pull ${{ env.DOCKERHUB_USERNAME }}/progphil-bot:latest
-              docker build --build-arg DISCORD_TOKEN=${{ env.DISCORD_TOKEN }} -t ${{ env.DOCKERHUB_USERNAME }}/progphil-bot:latest .
-              docker run -d --name progphil-bot ${{ env.DOCKERHUB_USERNAME }}/progphil-bot:latest
-              docker image prune -f
-              docker container prune -f
+              whoami
