@@ -53,5 +53,5 @@ jobs:
           
       - 
         name: Stop the server
-        run: ssh staging 'ls'  
+        run: ssh pph 'ls'  
           
