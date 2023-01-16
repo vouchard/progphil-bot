@@ -39,7 +39,6 @@ jobs:
             # Connecting to remote server via SSH
             host: ${{ secrets.REMOTE_SERVER }}
             username: ${{ secrets.REMOTE_SERVER_USERNAME }}
-            key: ${{ secrets.SSH_KEY }}
             password:  ${{ secrets.REMOTE_SERVER_PASSWORD }}
             # Includes Building the Docker image and deploying it to the remote server
             script: |
