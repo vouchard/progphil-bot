@@ -50,3 +50,8 @@ jobs:
           SSH_USER: ${{ secrets.REMOTE_SERVER_USERNAME }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
           SSH_HOST: ${{ secrets.REMOTE_SERVER }}
+          
+      - 
+        name: Stop the server
+        run: ssh staging 'ls'  
+          
