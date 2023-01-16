@@ -53,5 +53,5 @@ jobs:
           
       - 
         name: Stop the server
-        run: ssh pph 'ls'  
+        run: ssh pph 'touch it_works.txt'  
           
