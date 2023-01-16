@@ -34,12 +34,9 @@ jobs:
         #  password: ${{ env.TOKEN }}
       -
         name: Deploying to remote server via SSH
-        uses: appleboy/ssh-action@v0.1.7
+        uses: garygrossgarten/github-action-ssh@release
         with:
-            # Connecting to remote server via SSH
-            host: ${{ secrets.REMOTE_SERVER }}
-            username: ${{ secrets.REMOTE_SERVER_USERNAME }}
-            key:  ${{ secrets.SSH_KEY }}
-            # Includes Building the Docker image and deploying it to the remote server
-            script: |
-              whoami
+          command: ls -a
+          host: ${{ secrets.REMOTE_SERVER }}
+          username: pph
+          password: ${{ secrets.SSH_KEY}}
