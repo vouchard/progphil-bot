@@ -21,6 +21,11 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v3
+      -
+        name: Group of log lines
+        run: |
+          echo "${{ env.SERVER_USERNAME }}" 
+
      # - 
         #name: Login to DockerHub
         #uses: docker/login-action@v1
