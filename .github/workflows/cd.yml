@@ -43,5 +43,5 @@ jobs:
           script: |
               docker stop progphil-bot || true && docker rm progphil-bot || true
               docker pull ${{ env.DOCKERHUB_USERNAME }}/progphil-bot:latest
-              docker build --build-arg DISCORD_TOKEN=${{ env.DISCORD_TOKEN }} -t ${{ env.DOCKER_USERNAME }}/progphil-bot:latest .
+              docker build -t ${{ env.DOCKER_USERNAME }}/progphil-bot:latest .
               docker run -d --name progphil-bot -env token=${{ env.DISCORD_TOKEN }} ${{ env.DOCKER_USERNAME }}/progphil-bot:latest
