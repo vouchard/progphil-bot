@@ -14,7 +14,7 @@ env:
   REMOTE_SERVER: ${{ secrets.REMOTE_SERVER }}
   
   SERVER_USERNAME: ${{ secrets.REMOTE_SERVER_USERNAME }}
-  SERVER_SSH_KEY: ${{secrects.SSH_KEY}}
+  SERVER_SSH_KEY: ${{secrets.SSH_KEY}}
 
 jobs:
   build:
