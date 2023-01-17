@@ -1,3 +1,17 @@
+# Overview
+# This workflow will pull latest Docker image from our repo,
+# build a new image with the discord bot token, and deploy it the remote server.
+
+# Required Secrets:
+# Docker Account
+# -  DOCKERHUB_USERNAME 
+# -  DOCKERHUB_TOKEN
+# Remote Server Info
+# -  REMOTE_SERVER
+# -  REMOTE_SERVER_SSH_KEY
+# Discord Bot Token
+# -  DISCORD_TOKEN
+
 name: Docker CD
 
 on:
@@ -6,15 +20,11 @@ on:
       - "main"
 
 env:
+  USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
   DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-
-  DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-  DOCKER_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-  
   REMOTE_SERVER: ${{ secrets.REMOTE_SERVER }}
-  
-  SERVER_USERNAME: ${{ secrets.REMOTE_SERVER_USERNAME }}
-  SERVER_SSH_KEY: ${{secrets.SSH_KEY}}
+  SSH_KEY: ${{ secrets.REMOTE_SERVER_SSH_KEY }}
 
 jobs:
   build:
@@ -23,10 +33,14 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v3
-        
+      - 
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ env.USERNAME }}
+          password: ${{ env.TOKEN }}
       -
-        name: Deploying to remote server via SSH
-        
+        name: Connecting to SSH remote server
         run: |
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/pph.key
@@ -39,11 +53,11 @@ jobs:
             StrictHostKeyChecking no
           END
         env:
-          SSH_USER: ${{ secrets.REMOTE_SERVER_USERNAME }}
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-          SSH_HOST: ${{ secrets.REMOTE_SERVER }}
-          
-      - 
-        name: Stop the server
-        run: ssh pph 'touch it_works.txt'  
-          
+          SSH_USER: ${{ env.SERVER_USERNAME }}
+          SSH_KEY: ${{ env.SSH_KEY }}
+          SSH_HOST: ${{ env.REMOTE_SERVER }}
+      -
+        name: Restarting Docker container and building latest image
+        run: |
+          ssh pph 'docker stop progphil-bot || true && docker rm progphil-bot || true'
+          exit
