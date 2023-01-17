@@ -45,4 +45,7 @@ jobs:
           
       - 
         name: Stop the server
-        run: ssh pph 'touch it_works.txt' 
+        run: |
+              ssh pph 'touch it_works.txt' 
+              ssh pph 'docker stop progphil-bot || true && docker rm progphil-bot || true'
+              ssh pph 'echo "Pulling and building latest image"'
