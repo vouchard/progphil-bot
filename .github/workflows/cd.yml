@@ -44,8 +44,10 @@ jobs:
           SSH_HOST: ${{ secrets.REMOTE_SERVER }}
           
       - 
-        name: Stop the server
-        run: |
-              ssh pph 'touch it_works.txt' 
-              ssh pph 'docker stop progphil-bot || true && docker rm progphil-bot || true'
-              ssh pph 'echo "Pulling and building latest image"'
+        name: using appleboy
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.REMOTE_SERVER }}
+          username: ${{ secrets.REMOTE_SERVER_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: whoami
