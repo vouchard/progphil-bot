@@ -59,4 +59,4 @@ jobs:
       -
         name: Restarting Docker container and building latest image
         run: |
-          ssh pph 'docker stop progphil-bot'
+          ssh pph 'touch asd.txt'
